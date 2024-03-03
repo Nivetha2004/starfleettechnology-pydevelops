@@ -1,23 +1,19 @@
-sum_odd_digits= 0
-sum_even_digits = 0
-total = 0
-card_number = input(" enter a credit card #: ")
-card_number = card_number.replace("-", "")
-card_number = card_number.replace(" ", "")
-card_number = card_number[::-1]
-for x in  card_number[::2]:
-    sum_odd_digits += int(x)
-for x in card_number[1::2]:
-    x = int(x)*2
-    if x >= 10:
-        sum_even_digits += (1+(x%10))
+card_no = list(input("Enter a card number: ").replace(' ', '').replace('-', ''))
+last_no = card_no.pop()
+card_no.reverse()
+operated_digits = []
+for index, digit in enumerate(card_no):
+    digit = int(digit)
+    if index % 2 == 0:
+        two_digit = digit * 2
+        if two_digit > 9:
+            two_digit = two_digit - 9
+        operated_digits.append(two_digit)
     else:
-        sum_even_digits += x
-total = sum_odd_digits + sum_even_digits
-
-if total %10 == 0:
-     print("valid credit card")
+        operated_digits.append(digit)
+total = int(last_no) + sum(operated_digits)
+if total % 10 == 0:
+    print("Valid!")
 else:
-     print("not valid credit card")
-
+    print("Invalid!")
 
